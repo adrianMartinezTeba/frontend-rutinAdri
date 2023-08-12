@@ -6,7 +6,7 @@ const Login = () => {
   
   const navigate = useNavigate()
   useEffect(()=>{
-setTimeo(() => {
+setTimeout(() => {
   navigate('/home')
 }, 2000);
   },[])
