@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -6,7 +6,7 @@ const Login = () => {
   
   const navigate = useNavigate()
   useEffect(()=>{
-setTimeout(() => {
+setTimeo(() => {
   navigate('/home')
 }, 2000);
   },[])
