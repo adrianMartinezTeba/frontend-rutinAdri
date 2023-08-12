@@ -1,0 +1,21 @@
+.exContainer{
+display: flex;
+flex-direction: column;
+justify-content: center;
+p{
+    margin: 15px;
+}
+.vi-img-container{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+img{
+    width: 30vw;
+    margin: 10px;
+}
+iframe{
+margin: 10px;
+}
+}
