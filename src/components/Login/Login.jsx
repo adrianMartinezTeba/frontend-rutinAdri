@@ -1,47 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { login, reset } from "../../features/users/usersSlice";
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const { email, password } = formData;
+  const dispatch = useDispatch();
   const navigate = useNavigate()
+  const { isSuccess, message, isError,user } = useSelector((state) => state.users);
   useEffect(()=>{
-setTimeout(() => {
-  navigate('/home')
-}, 2000);
-  },[])
+console.log(formData);
+console.log(user);
+  },[formData,user])
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
   
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login(formData));
   };
-  
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Aquí puedes realizar la lógica de autenticación con los valores de username y password
-    console.log('Usuario:', username);
-    console.log('Contraseña:', password);
-    // Por ahora, solo estamos imprimiendo los valores en la consola
-    
-    // Puedes agregar aquí la lógica para enviar los datos al servidor y manejar la autenticación
-  };
-  
+
   return (
     <div>
       <h2>Iniciar sesión</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <div>
-          <label htmlFor="username">Nombre de usuario:</label>
-          <input type="text" id="username" value={username} onChange={handleUsernameChange} />
+          <label htmlFor="username">Email:</label>
+          <input type="email" name='email' value={email} onChange={onChange} placeholder='email' />
         </div>
         <div>
           <label htmlFor="password">Contraseña:</label>
-          <input type="password" id="password" value={password} onChange={handlePasswordChange} />
+          <input type="password" name="password" value={password} onChange={onChange} placeholder='password' />
         </div>
         <button type="submit">Iniciar sesión</button>
+        <p>Si no tienes cuenta registrate haciendo click <Link to={'/register'}>aqui</Link></p>
       </form>
     </div>
   );

@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 const Wellcome = () => {
     const navigate = useNavigate()
     useEffect(()=>{
+      
 setTimeout(() => {
-    navigate('/login')
+    
 }, 2000);
     },[])
   return (
