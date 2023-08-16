@@ -11,7 +11,7 @@ const getExerciseById = async (id) => {
     return res.data;
 };
 const createExercise = async (exercise) => {
-    const res = await axios.post(`${API_URL}/exercises/createEx`,exercise);
+    const res = await axios.post(`${API_URL}/exercises/create`,exercise);
     return res.data;
 }
 
