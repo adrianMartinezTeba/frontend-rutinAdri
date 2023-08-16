@@ -10,15 +10,18 @@ const SeByName = () => {
   useEffect(() => {
     if (searchTerm) {
       dispatch(getExerciseByName(searchTerm));
+
     } else {
       dispatch(reset()); // Reset exercises state when search term is empty
     }
-  }, [dispatch, searchTerm]);
-
+    
+  }, [searchTerm]);
+useEffect(()=>{
+console.log(exercises);
+},[exercises])
   // Sort and get the first 3 exercises alphabetically
-  const sortedExercises = exercises
-    .slice() // Create a copy to avoid mutating the original array
-    .sort((a, b) => a.name.localeCompare(b.name)); // Sort exercises alphabetically
+  const sortedExercises = exercises.sort((a, b) => a.name.localeCompare(b.name)); // Create a copy to avoid mutating the original array
+ // Sort exercises alphabetically
   const top3Exercises = sortedExercises.slice(0, 3); // Get the first 3 exercises
 
   return (
