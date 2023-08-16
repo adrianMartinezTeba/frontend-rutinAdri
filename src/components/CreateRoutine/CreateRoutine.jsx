@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch} from "react-redux";
+import { login, reset } from "../../features/users/usersSlice";
 
 const CreateRoutine = () => {
   const [routineName, setRoutineName] = useState('');
@@ -19,7 +21,9 @@ const CreateRoutine = () => {
     updatedDays[dayIndex].exercises.push({ exerciseId });
     setRoutineDays(updatedDays);
   };
+const handleCreateRoutine = (routine) =>{
 
+}
   return (
     <div>
       <h2>Crear Rutina</h2>
