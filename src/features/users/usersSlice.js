@@ -74,11 +74,12 @@ export const login = createAsyncThunk("users/login", async (userData, thunkAPI) 
         return thunkAPI.rejectWithValue(message);
     }
 });
-export const logout = createAsyncThunk("users/logout", async () => {
+export const logout = createAsyncThunk("users/logout", async (thunkAPI) => {
     try {
       return await usersService.logout();
     } catch (error) {
       console.error(error);
+      return thunkAPI.rejectWithValue(message);
     }
   });
 export const { reset } = usersSlice.actions;

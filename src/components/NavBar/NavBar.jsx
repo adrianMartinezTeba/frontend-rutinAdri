@@ -4,22 +4,13 @@ import './NavBar.scss'
 const navBar = () => {
   return (
     <div className='navBar-container'>
-        <nav>
-     <ul>
-     <li>
-      <Link to={'/home'}>Home</Link>
-     </li>
-     <li>
-      <Link to={'/register'}>Register</Link>
-     </li>
-     <li>
-      <Link to={'/login'}>Login</Link>
-     </li>
-     <li>
-      <Link to={'/'}>wellcome</Link>
-     </li>
-     </ul>
-     </nav>
+      <div className='links-container'>
+        <Link className='navBar-item' to={'/home'}>Home</Link>
+        <Link className='navBar-item' to={'/createEx'}>CrEx</Link>
+        <Link className='navBar-item' to={'/register'}>Register</Link>
+        <Link className='navBar-item' to={'/login'}>Login</Link>
+        <Link className='navBar-item' to={'/'}>wellcome</Link>
+      </div>
     </div>
   )
 }

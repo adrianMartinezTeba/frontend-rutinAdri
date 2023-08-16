@@ -1,45 +1,63 @@
-import React, { useEffect } from 'react'
-import './Exercises.scss'
+import React, { useEffect, useState } from 'react';
+import './Exercises.scss';
 import { useDispatch, useSelector } from "react-redux";
-import { getAllExercises } from "../../features/exercises/exercisesSlice";
+import { getAllExercises, getExerciseById } from "../../features/exercises/exercisesSlice";
+import Exercise from '../Exercise/Exercise';
+
 const Exercises = () => {
+    const [showExercise, setShowExercise] = useState(false);
     const dispatch = useDispatch();
     const { exercises } = useSelector((state) => state.exercises);
+
     useEffect(() => {
-        dispatch(getAllExercises())
-    }, [])
+        dispatch(getAllExercises());
+    }, []);
     useEffect(() => {
-        console.log(exercises);
-    }, [exercises])
+       
+    }, [showExercise]);
+
+    const handleExerciseInd = async(id) => {
+        await dispatch(getExerciseById(id));
+        setShowExercise(true)
+    };
+
     return (
         <div>
-            {exercises.map((exercise) => (
-                <div className='exContainer' key={exercise._id}>
-                    <h3>Exercise: {exercise.name}</h3>
-                    <p>Description: {exercise.description}</p>
-                    <p>Primary muscle zone: {exercise.muscleZonePrincipal}</p>
-                    <p>Secundaries muscles zones:
-                        {exercise.muscleZoneSecundaries.map((mzs) => (
-                            <span key={mzs}>
-                                {mzs}
-                            </span>
-                        ))}
-                    
-                    </p>
-                    <p>Difficulty:{exercise.difficuty}</p>
-                    <div className='vi-img-container'>
-                        <img src={exercise.imageMZP} alt="Principal muscle" />
-                        <iframe
-                            src={`https://www.youtube.com/embed/${exercise.videoId}`} // URL del video
-                            title="YouTube Video"
-                            frameborder="0" // Sin borde del reproductor
-                            allowfullscreen // Permite pantalla completa
-                        ></iframe>
+            {showExercise ? (
+                <div>
+                    <div>
+                        <Exercise /> 
+                        <button onClick={()=>setShowExercise(false)}>Cerrar exercise</button>
                     </div>
+                    {exercises.map((exercise) => (
+                        <div
+                            onClick={() => handleExerciseInd(exercise._id)}
+                            className='exContainer'
+                            key={exercise._id}
+                        >
+                            <h3>Exercise: {exercise.name}</h3>
+                            <p>Description: {exercise.description}</p>
+                            <p>Primary muscle zone: {exercise.muscleZonePrincipal}</p>
+                        </div>
+                    ))}
                 </div>
-            ))}
+            ) : (
+                <div>
+                    {exercises.map((exercise) => (
+                        <div
+                            onClick={() => handleExerciseInd(exercise._id)}
+                            className='exContainer'
+                            key={exercise._id}
+                        >
+                            <h3>Exercise: {exercise.name}</h3>
+                            <p>Description: {exercise.description}</p>
+                            <p>Primary muscle zone: {exercise.muscleZonePrincipal}</p>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
-    )
-}
+    );
+};
 
-export default Exercises
+export default Exercises;
