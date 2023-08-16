@@ -16,9 +16,9 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/createEx" element={<AdmAddEx/>} />
           <Route path="/exerciseInd" element={<Exercise />} />
-          <Route path="/" element={<Wellcome />} />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/home" element={<Home />} />
+   
         </Routes>
       </BrowserRouter>
     </>
