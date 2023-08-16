@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import exercisesService from "./exercisesService";
-
+const exercise = JSON.parse(localStorage.getItem("exercise"));
 const initialState = {
   exercises: [],
-  exercise: null,
+  exercise: exercise ? exercise : null,
   isLoading: false,
   isError: false,
   message:''
@@ -39,6 +39,15 @@ export const exercisesSlice = createSlice({
     .addCase(getExerciseById.rejected, (state) => {
       state.isError = true;
     })
+    .addCase(getExerciseByName.fulfilled, (state, action) => {
+      state.exercises = action.payload;
+    })
+    .addCase(getExerciseByName.pending, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(getExerciseByName.rejected, (state) => {
+      state.isError = true;
+    })
     .addCase(createExercise.fulfilled, (state, action) => {
       state.exercise = action.payload;
     })
@@ -71,7 +80,17 @@ async (id,thunkAPI) => {
     }
   }
 );
-export const createExercise = createAsyncThunk("exercises/createEercis ",
+export const getExerciseByName = createAsyncThunk("exercises/getExerciseByName ",
+async (name,thunkAPI) => {
+    try {
+      return await exercisesService.getExerciseByName(name);
+    } catch (error) {
+      console.error(error);
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+export const createExercise = createAsyncThunk("exercises/create",
 async (exercise,thunkAPI) => {
     try {
       return await exercisesService.createExercise(exercise);

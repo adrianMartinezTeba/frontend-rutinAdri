@@ -10,6 +10,10 @@ const getExerciseById = async (id) => {
     const res = await axios.get(`${API_URL}/exercises/byID/${id}`);
     return res.data;
 };
+const getExerciseByName = async (name) => {
+    const res = await axios.get(`${API_URL}/exercises/byName/${name}`);
+    return res.data;
+};
 const createExercise = async (exercise) => {
     const res = await axios.post(`${API_URL}/exercises/create`,exercise);
     return res.data;
@@ -18,7 +22,8 @@ const createExercise = async (exercise) => {
 const exercisesService = {
     getAllExercises,
     getExerciseById,
-    createExercise
+    createExercise,
+    getExerciseByName
    
 };
 

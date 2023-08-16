@@ -8,7 +8,7 @@ const initialState = {
   isError: false,
   message:''
 };
-export const exercisesSlice = createSlice({
+export const routinesSlice = createSlice({
   name: "routines",
   initialState,
   reducers: {
@@ -21,13 +21,13 @@ export const exercisesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-    .addCase(getAllExercises.fulfilled, (state, action) => {
-      state.exercises = action.payload;
+    .addCase(createRoutine.fulfilled, (state, action) => {
+ 
     })
-    .addCase(getAllExercises.pending, (state) => {
+    .addCase(createRoutine.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(getAllExercises.rejected, (state) => {
+    .addCase(createRoutine.rejected, (state) => {
       state.isError = true;
     })
   },
@@ -43,5 +43,5 @@ async (routine,thunkAPI) => {
     }
   }
 );
-export const { reset } = exercisesSlice.actions;
-export default exercisesSlice.reducer;
+export const { reset } = routinesSlice.actions;
+export default routinesSlice.reducer;

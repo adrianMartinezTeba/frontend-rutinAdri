@@ -1,38 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from "react-redux";
 import { createExercise } from "../../features/exercises/exercisesSlice";
 
 const AdmAddEx = () => {
-    const dispatch = useDispatch();
-    const { exercise } = useSelector((state) => state.exercises);
-  const [exerciseType, setExerciseType] = useState('');
-  const [exerciseName, setExerciseName] = useState('');
-  const [exerciseDescription, setExerciseDescription] = useState('');
-  const [muscleZonePrincipal, setMuscleZonePrincipal] = useState('');
-  const [muscleZoneSecundaries, setMuscleZoneSecundaries] = useState([]);
-  const [exerciseDifficulty, setExerciseDifficulty] = useState('');
-  const [exerciseImage, setExerciseImage] = useState('');
-  const [exerciseVideoId, setExerciseVideoId] = useState('');
+  const dispatch = useDispatch();
+  
+  const [exerciseFormData, setExerciseFormData] = useState({
+    type: "",
+    name: "",
+    description: "",
+    muscleZonePrincipal: "",
+    muscleZoneSecundaries: "",
+    difficulty: "",
+    imageMZP: "",
+    videoId: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setExerciseFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const handleAddExercise = () => {
-    // Aquí puedes enviar los datos del ejercicio al servidor o Redux para su almacenamiento
-    const newExercise = {
-      type: exerciseType,
-      name: exerciseName,
-      description: exerciseDescription,
-      muscleZonePrincipal: muscleZonePrincipal,
-      muscleZoneSecundaries: muscleZoneSecundaries,
-      difficulty: exerciseDifficulty,
-      imageMZP: exerciseImage,
-      videoId: exerciseVideoId,
-    };
-dispatch(createExercise(newExercise))
-    // Lógica para enviar los datos del ejercicio al backend (usando Redux, por ejemplo)
-    // dispatch(addExerciseAction(newExercise));
+    dispatch(createExercise(exerciseFormData)); // Envía los datos del ejercicio a Redux para su almacenamiento
   };
-useEffect(()=>{
 
-},[])
+  useEffect(() => {
+    console.log(exerciseFormData);
+  }, [exerciseFormData]);
+
   return (
     <div>
       <h2>Agregar Ejercicio</h2>
@@ -40,46 +39,52 @@ useEffect(()=>{
         <label>Tipo:</label>
         <input
           type="text"
-          value={exerciseType}
-          onChange={(e) => setExerciseType(e.target.value)}
+          name="type"
+          value={exerciseFormData.type}
+          onChange={handleInputChange}
         />
       </div>
       <div>
         <label>Nombre:</label>
         <input
           type="text"
-          value={exerciseName}
-          onChange={(e) => setExerciseName(e.target.value)}
+          name="name"
+          value={exerciseFormData.name}
+          onChange={handleInputChange}
         />
       </div>
       <div>
         <label>Descripción:</label>
         <textarea
-          value={exerciseDescription}
-          onChange={(e) => setExerciseDescription(e.target.value)}
+          name="description"
+          value={exerciseFormData.description}
+          onChange={handleInputChange}
         />
       </div>
       <div>
         <label>Zona Muscular Principal:</label>
         <input
           type="text"
-          value={muscleZonePrincipal}
-          onChange={(e) => setMuscleZonePrincipal(e.target.value)}
+          name="muscleZonePrincipal"
+          value={exerciseFormData.muscleZonePrincipal}
+          onChange={handleInputChange}
         />
       </div>
       <div>
         <label>Zonas Musculares Secundarias:</label>
         <input
           type="text"
-          value={muscleZoneSecundaries.join(', ')}
-          onChange={(e) => setMuscleZoneSecundaries(e.target.value.split(', '))}
+          name="muscleZoneSecundaries"
+          value={exerciseFormData.muscleZoneSecundaries}
+          onChange={handleInputChange}
         />
       </div>
       <div>
         <label>Dificultad:</label>
         <select
-          value={exerciseDifficulty}
-          onChange={(e) => setExerciseDifficulty(e.target.value)}
+          name="difficulty"
+          value={exerciseFormData.difficulty}
+          onChange={handleInputChange}
         >
           <option value="Fácil">Fácil</option>
           <option value="Moderado">Moderado</option>
@@ -90,21 +95,23 @@ useEffect(()=>{
         <label>URL de la Imagen:</label>
         <input
           type="text"
-          value={exerciseImage}
-          onChange={(e) => setExerciseImage(e.target.value)}
+          name="imageMZP"
+          value={exerciseFormData.imageMZP}
+          onChange={handleInputChange}
         />
       </div>
       <div>
         <label>ID del Video:</label>
         <input
           type="text"
-          value={exerciseVideoId}
-          onChange={(e) => setExerciseVideoId(e.target.value)}
+          name="videoId"
+          value={exerciseFormData.videoId}
+          onChange={handleInputChange}
         />
       </div>
       <button onClick={handleAddExercise}>Agregar Ejercicio</button>
     </div>
   );
-};
+}
 
 export default AdmAddEx;
