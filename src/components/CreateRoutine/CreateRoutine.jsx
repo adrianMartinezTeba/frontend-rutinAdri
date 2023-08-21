@@ -5,6 +5,7 @@ import { createRoutine } from "../../features/routines/routinesSlice";
 const CreateRoutine = () => {
   const dispatch = useDispatch();
   const [opSearcher,setOpSearcher] = useState(false)
+  const [exerciseIds,sortedExercisesIds]= useState([])
   const [routineData, setRoutineData] = useState({
     name: '',
     description: '',

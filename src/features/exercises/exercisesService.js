@@ -14,8 +14,24 @@ const getExerciseByName = async (name) => {
     const res = await axios.get(`${API_URL}/exercises/byName/${name}`);
     return res.data;
 };
+const getExerciseByType = async (type) => {
+    const res = await axios.get(`${API_URL}/exercises/byType/${type}`);
+    return res.data;
+};
+const getExerciseByDifficulty = async (difficulty) => {
+    const res = await axios.get(`${API_URL}/exercises/byName/${difficulty}`);
+    return res.data;
+};
+const getExerciseByMuscleZoneSecundaries = async (muscleZoneSecundaries) => {
+    const res = await axios.get(`${API_URL}/exercises/byMuscleZoneSecundaries/${muscleZoneSecundaries}`);
+    return res.data;
+};
+const getExerciseByMuscleZonePrincipal = async (muscleZonePrincipal) => {
+    const res = await axios.get(`${API_URL}/exercises/byMuscleZonePrincipal/${muscleZonePrincipal}`);
+    return res.data;
+};
 const createExercise = async (exercise) => {
-    const res = await axios.post(`${API_URL}/exercises/create`,exercise);
+    const res = await axios.post(`${API_URL}/exercises/create`, exercise);
     return res.data;
 }
 
@@ -23,8 +39,11 @@ const exercisesService = {
     getAllExercises,
     getExerciseById,
     createExercise,
-    getExerciseByName
-   
+    getExerciseByName,
+    getExerciseByDifficulty,
+    getExerciseByMuscleZonePrincipal,
+    getExerciseByMuscleZoneSecundaries,
+    getExerciseByType
 };
 
 export default exercisesService;

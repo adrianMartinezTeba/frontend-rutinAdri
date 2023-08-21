@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SeByPrMsc = () => {
+const SeByDifficulty = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const SeByPrMsc = () => {
   )
 }
 
-export default SeByPrMsc
+export default SeByDifficulty
