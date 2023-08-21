@@ -17,7 +17,7 @@ const SeByName = () => {
     
   }, [searchTerm]);
 useEffect(()=>{
-console.log(exercises);
+
 },[exercises])
   // Sort and get the first 3 exercises alphabetically
   const sortedExercises = exercises.sort((a, b) => a.name.localeCompare(b.name)); // Create a copy to avoid mutating the original array

@@ -12,22 +12,27 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const { isSuccess, message, isError,user } = useSelector((state) => state.users);
-  useEffect(()=>{
-console.log(formData);
-console.log(user);
-  },[formData,user])
-
+  
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login(formData));
+  };
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
-  
-  const onSubmit = (e) => {
-    e.preventDefault();
-    dispatch(login(formData));
-  };
+  // useEffect(()=>{
+
+  // },[formData,user])
+  useEffect(()=>{
+if (isSuccess) {
+  navigate('/home')
+  dispatch(reset())
+  console.log(isSuccess);
+}
+  },[isSuccess])
 
   return (
     <div>
@@ -43,6 +48,7 @@ console.log(user);
         </div>
         <button type="submit">Iniciar sesión</button>
         <p>Si no tienes cuenta registrate haciendo click <Link to={'/register'}>aqui</Link></p>
+        <p>O entra como invitado <Link to={'/home'}>aquí</Link></p>
       </form>
     </div>
   );
