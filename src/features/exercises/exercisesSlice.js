@@ -4,6 +4,9 @@ const exercise = JSON.parse(localStorage.getItem("exercise"));
 const initialState = {
   exercises: [],
   exercisesByDifficulty:[],
+  exercisesByType:[],
+  exercisesByMscZonePrinc:[],
+  exercisesByName:[],
   exercise: exercise ? exercise : null,
   isLoading: false,
   isError: false,
@@ -41,7 +44,7 @@ export const exercisesSlice = createSlice({
       state.isError = true;
     })
     .addCase(getExerciseByName.fulfilled, (state, action) => {
-      state.exercises = action.payload;
+      state.exercisesByName = action.payload;
     })
     .addCase(getExerciseByName.pending, (state) => {
       state.isLoading = true;
@@ -50,7 +53,7 @@ export const exercisesSlice = createSlice({
       state.isError = true;
     })
     .addCase(getExerciseByType.fulfilled, (state, action) => {
-      state.exercises = action.payload;
+      state.exercisesByType = action.payload;
     })
     .addCase(getExerciseByType.pending, (state) => {
       state.isLoading = true;
@@ -68,16 +71,7 @@ export const exercisesSlice = createSlice({
       state.isError = true;
     })
     .addCase(getExerciseByMuscleZonePrincipal.fulfilled, (state, action) => {
-      state.exercises = action.payload;
-    })
-      .addCase(getExerciseByMuscleZoneSecundaries.fulfilled, (state, action) => {
-      state.exercises = action.payload;
-    })
-    .addCase(getExerciseByMuscleZoneSecundaries.pending, (state) => {
-      state.isLoading = true;
-    })
-    .addCase(getExerciseByMuscleZoneSecundaries.rejected, (state) => {
-      state.isError = true;
+      state.exercisesByMscZonePrinc = action.payload;
     })
     .addCase(getExerciseByMuscleZonePrincipal.pending, (state) => {
       state.isLoading = true;
@@ -142,17 +136,6 @@ export const getExercisesByDifficulty = createAsyncThunk("exercises/getExercises
   async (difficulty, thunkAPI) => {
     try {
       return await exercisesService.getExercisesByDifficulty(difficulty);
-    } catch (error) {
-      console.error(error);
-      return thunkAPI.rejectWithValue(error.message); // Pasar el mensaje de error
-    }
-  }
-);
-
-export const getExerciseByMuscleZoneSecundaries = createAsyncThunk("exercises/getExerciseByMuscleZoneSecundaries",
-  async (muscleZoneSecundaries, thunkAPI) => {
-    try {
-      return await exercisesService.getExerciseByMuscleZoneSecundaries(muscleZoneSecundaries);
     } catch (error) {
       console.error(error);
       return thunkAPI.rejectWithValue(error.message); // Pasar el mensaje de error

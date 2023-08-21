@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import SeByName from '../SeByName/SeByName';
 import SeByDifficulty from '../SeByDifficulty/SeByDifficulty';
 import SeByPrMsc from '../SeByPrMsc/SeByPrMsc';
-import SeBySeMsc from '../SeBySeMsc/SeBySeMsc';
 import SeByType from '../SeByType/SeByType';
 
 const Searcher = () => {
@@ -19,7 +18,6 @@ const Searcher = () => {
           <button onClick={() => handleComponentClick('byName')}>Buscar por Nombre</button>
           <button onClick={() => handleComponentClick('byDifficulty')}>Buscar por Dificultad</button>
           <button onClick={() => handleComponentClick('byPrMsc')}>Buscar por Zona Muscular Principal</button>
-          <button onClick={() => handleComponentClick('bySeMsc')}>Buscar por Zona Muscular Secundaria</button>
           <button onClick={() => handleComponentClick('byType')}>Buscar por Tipo</button>
         </>
       ) : (
@@ -27,7 +25,6 @@ const Searcher = () => {
           {activeComponent === 'byName' && <SeByName />}
           {activeComponent === 'byDifficulty' && <SeByDifficulty />}
           {activeComponent === 'byPrMsc' && <SeByPrMsc />}
-          {activeComponent === 'bySeMsc' && <SeBySeMsc />}
           {activeComponent === 'byType' && <SeByType />}
         </>
       )}

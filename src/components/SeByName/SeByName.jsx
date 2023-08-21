@@ -4,25 +4,18 @@ import { getExerciseByName, reset } from '../../features/exercises/exercisesSlic
 
 const SeByName = () => {
   const dispatch = useDispatch();
+  const { isSuccess, message, isError, exercisesByName } = useSelector((state) => state.exercises);
   const [searchTerm, setSearchTerm] = useState('');
-  const { isSuccess, message, isError, exercises } = useSelector((state) => state.exercises);
 
   useEffect(() => {
     if (searchTerm) {
       dispatch(getExerciseByName(searchTerm));
-
-    } else {
-      dispatch(reset()); // Reset exercises state when search term is empty
     }
-    
   }, [searchTerm]);
-useEffect(()=>{
 
-},[exercises])
-  // Sort and get the first 3 exercises alphabetically
-  const sortedExercises = exercises.sort((a, b) => a.name.localeCompare(b.name)); // Create a copy to avoid mutating the original array
- // Sort exercises alphabetically
-  const top3Exercises = sortedExercises.slice(0, 3); // Get the first 3 exercises
+  const onChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
   return (
     <div>
@@ -31,11 +24,29 @@ useEffect(()=>{
         type="text"
         placeholder="Buscar ejercicio..."
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={onChange}
       />
       <ul>
-        {top3Exercises.map((exercise) => (
-          <li key={exercise._id}>{exercise.name}</li>
+        {exercisesByName.map((exercise) => (
+          <div className='exContainer' key={exercise._id}>
+          <h3>Exercise: {exercise.name}</h3>
+          <p>Description: {exercise.description}</p>
+          <p>Primary muscle zone: {exercise.muscleZonePrincipal}</p>
+          <p>
+            Secundaries muscles zones:
+            {exercise.muscleZoneSecundaries}
+          </p>
+          <p>Difficulty: {exercise.difficulty}</p>
+          <div className='vi-img-container'>
+            <img src={exercise.imageMZP} alt='Principal muscle' />
+            <iframe
+              src={`https://www.youtube.com/embed/${exercise.videoId}`} // URL del video
+              title='YouTube Video'
+              frameBorder='0' // Sin borde del reproductor
+              allowFullScreen // Permite pantalla completa
+            ></iframe>
+          </div>
+        </div>
         ))}
       </ul>
     </div>

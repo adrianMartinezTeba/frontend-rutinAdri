@@ -22,10 +22,6 @@ const getExercisesByDifficulty = async (difficulty) => {
     const res = await axios.get(`${API_URL}/exercises/byDifficulty/${difficulty}`);
     return res.data;
 };
-const getExerciseByMuscleZoneSecundaries = async (muscleZoneSecundaries) => {
-    const res = await axios.get(`${API_URL}/exercises/byMuscleZoneSecundaries/${muscleZoneSecundaries}`);
-    return res.data;
-};
 const getExerciseByMuscleZonePrincipal = async (muscleZonePrincipal) => {
     const res = await axios.get(`${API_URL}/exercises/byMuscleZonePrincipal/${muscleZonePrincipal}`);
     return res.data;
@@ -42,7 +38,6 @@ const exercisesService = {
     getExerciseByName,
     getExercisesByDifficulty,
     getExerciseByMuscleZonePrincipal,
-    getExerciseByMuscleZoneSecundaries,
     getExerciseByType
 };
 
