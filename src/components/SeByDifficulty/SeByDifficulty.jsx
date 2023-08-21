@@ -6,53 +6,28 @@ const SeByDifficulty = () => {
   const dispatch = useDispatch();
   const { exercisesByDifficulty } = useSelector((state) => state.exercises);
 
-  const [difficulty, setDifficulty] = useState({
-    easy: false,
-    medium: false,
-    hard: false,
-  });
+  const [selectedDifficulty, setSelectedDifficulty] = useState(null);
 
-  const handleDifficultyEasy = () => {
-    setDifficulty({
-      easy: true,
-      medium: false,
-      hard: false,
-    });
+  const handleDifficultyClick = (difficulty) => {
+    setSelectedDifficulty(difficulty);
+    dispatch(getExercisesByDifficulty(difficulty));
   };
 
-  const handleDifficultyMedium = () => {
-    setDifficulty({
-      easy: false,
-      medium: true,
-      hard: false,
-    });
-  };
-
-  const handleDifficultyHard = () => {
-    setDifficulty({
-      easy: false,
-      medium: false,
-      hard: true,
-    });
-  };
+  const difficultyOptions = ['Easy', 'Medium', 'Hard'];
 
   useEffect(() => {
-    if (difficulty.easy) {
-      dispatch(getExercisesByDifficulty('Easy'));
-    } else if (difficulty.medium) {
-      dispatch(getExercisesByDifficulty('Medium'));
-    } else if (difficulty.hard) {
-      dispatch(getExercisesByDifficulty('Hard'));
+    if (selectedDifficulty) {
+      dispatch(getExercisesByDifficulty(selectedDifficulty));
     }
-  }, [difficulty, dispatch]);
-useEffect(()=>{
+  }, [selectedDifficulty, dispatch]);
 
-},[exercisesByDifficulty])
   return (
     <div>
-      <button onClick={handleDifficultyEasy}>Easy</button>
-      <button onClick={handleDifficultyMedium}>Medium</button>
-      <button onClick={handleDifficultyHard}>Hard</button>
+      {difficultyOptions.map((difficulty) => (
+        <button key={difficulty} onClick={() => handleDifficultyClick(difficulty)}>
+          {difficulty}
+        </button>
+      ))}
       {exercisesByDifficulty ? (
         exercisesByDifficulty.map((exercise) => (
           <div className='exContainer' key={exercise._id}>
