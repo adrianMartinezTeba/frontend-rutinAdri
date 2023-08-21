@@ -18,7 +18,7 @@ const getExerciseByType = async (type) => {
     const res = await axios.get(`${API_URL}/exercises/byType/${type}`);
     return res.data;
 };
-const getExerciseByDifficulty = async (difficulty) => {
+const getExercisesByDifficulty = async (difficulty) => {
     const res = await axios.get(`${API_URL}/exercises/byName/${difficulty}`);
     return res.data;
 };
@@ -40,7 +40,7 @@ const exercisesService = {
     getExerciseById,
     createExercise,
     getExerciseByName,
-    getExerciseByDifficulty,
+    getExercisesByDifficulty,
     getExerciseByMuscleZonePrincipal,
     getExerciseByMuscleZoneSecundaries,
     getExerciseByType

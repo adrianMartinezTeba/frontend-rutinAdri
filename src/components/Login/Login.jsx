@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { login, reset } from "../../features/users/usersSlice";
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const { email, password } = formData;
-  const dispatch = useDispatch();
-  const navigate = useNavigate()
   const { isSuccess, message, isError,user } = useSelector((state) => state.users);
   
   const onSubmit = (e) => {

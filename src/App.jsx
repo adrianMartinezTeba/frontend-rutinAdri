@@ -7,6 +7,8 @@ import NavBar from "./components/NavBar/NavBar";
 import Register from "./components/Register/Register";
 import Exercise from "./components/Exercise/Exercise";
 import AdmAddEx from "./components/AdmAddEx/AdmAddEx";
+import Searcher from "./components/Searcher/Searcher";
+
 function App() {
 
   return (
@@ -18,6 +20,7 @@ function App() {
           <Route path="/createEx" element={<AdmAddEx/>} />
           <Route path="/exerciseInd" element={<Exercise />} />
           <Route path="/" element={<Wellcome/>} />
+          <Route path="/searcher" element={<Searcher/>} />
           <Route path="/home" element={<Home/>}/>
           <Route path="/login" element={<Login />} />
    

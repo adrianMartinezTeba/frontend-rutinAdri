@@ -3,6 +3,7 @@ import exercisesService from "./exercisesService";
 const exercise = JSON.parse(localStorage.getItem("exercise"));
 const initialState = {
   exercises: [],
+  exercisesByDifficulty:[],
   exercise: exercise ? exercise : null,
   isLoading: false,
   isError: false,
@@ -57,13 +58,13 @@ export const exercisesSlice = createSlice({
     .addCase(getExerciseByType.rejected, (state) => {
       state.isError = true;
     })
-    .addCase(getExerciseByDifficulty.fulfilled, (state, action) => {
-      state.exercises = action.payload;
+    .addCase(getExercisesByDifficulty.fulfilled, (state, action) => {
+      state.exercisesByDifficulty = action.payload;
     })
-    .addCase(getExerciseByDifficulty.pending, (state) => {
+    .addCase(getExercisesByDifficulty.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(getExerciseByDifficulty.rejected, (state) => {
+    .addCase(getExercisesByDifficulty.rejected, (state) => {
       state.isError = true;
     })
     .addCase(getExerciseByMuscleZonePrincipal.fulfilled, (state, action) => {
@@ -137,10 +138,10 @@ export const getExerciseByType = createAsyncThunk("exercises/getExerciseByType",
   }
 );
 
-export const getExerciseByDifficulty = createAsyncThunk("exercises/getExerciseByDifficulty",
+export const getExercisesByDifficulty = createAsyncThunk("exercises/getExercisesByDifficulty",
   async (difficulty, thunkAPI) => {
     try {
-      return await exercisesService.getExerciseByDifficulty(difficulty);
+      return await exercisesService.getExercisesByDifficulty(difficulty);
     } catch (error) {
       console.error(error);
       return thunkAPI.rejectWithValue(error.message); // Pasar el mensaje de error
