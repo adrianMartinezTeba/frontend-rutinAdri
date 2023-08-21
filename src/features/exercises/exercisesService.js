@@ -19,7 +19,7 @@ const getExerciseByType = async (type) => {
     return res.data;
 };
 const getExercisesByDifficulty = async (difficulty) => {
-    const res = await axios.get(`${API_URL}/exercises/byName/${difficulty}`);
+    const res = await axios.get(`${API_URL}/exercises/byDifficulty/${difficulty}`);
     return res.data;
 };
 const getExerciseByMuscleZoneSecundaries = async (muscleZoneSecundaries) => {

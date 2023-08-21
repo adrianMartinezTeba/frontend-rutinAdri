@@ -45,7 +45,9 @@ const SeByDifficulty = () => {
       dispatch(getExercisesByDifficulty('hard'));
     }
   }, [difficulty, dispatch]);
+useEffect(()=>{
 
+},[exercisesByDifficulty])
   return (
     <div>
       <button onClick={handleDifficultyEasy}>Easy</button>
