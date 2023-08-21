@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getExerciseByName, reset } from '../../features/exercises/exercisesSlice';
+import { getExercisesByName, reset } from '../../features/exercises/exercisesSlice';
 
 const SeByName = () => {
   const dispatch = useDispatch();
@@ -9,7 +9,7 @@ const SeByName = () => {
 
   useEffect(() => {
     if (searchTerm) {
-      dispatch(getExerciseByName(searchTerm));
+      dispatch(getExercisesByName(searchTerm));
     }
   }, [searchTerm]);
 
@@ -38,7 +38,7 @@ const SeByName = () => {
           </p>
           <p>Difficulty: {exercise.difficulty}</p>
           <div className='vi-img-container'>
-            <img src={exercise.imageMZP} alt='Principal muscle' />
+      
             <iframe
               src={`https://www.youtube.com/embed/${exercise.videoId}`} // URL del video
               title='YouTube Video'

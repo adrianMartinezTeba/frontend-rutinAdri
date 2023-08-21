@@ -10,7 +10,6 @@ const SeByDifficulty = () => {
 
   const handleDifficultyClick = (difficulty) => {
     setSelectedDifficulty(difficulty);
-    dispatch(getExercisesByDifficulty(difficulty));
   };
 
   const difficultyOptions = ['Easy', 'Medium', 'Hard'];
@@ -40,7 +39,7 @@ const SeByDifficulty = () => {
             </p>
             <p>Difficulty: {exercise.difficulty}</p>
             <div className='vi-img-container'>
-              <img src={exercise.imageMZP} alt='Principal muscle' />
+             
               <iframe
                 src={`https://www.youtube.com/embed/${exercise.videoId}`} // URL del video
                 title='YouTube Video'

@@ -4,7 +4,7 @@ const exercise = JSON.parse(localStorage.getItem("exercise"));
 const initialState = {
   exercises: [],
   exercisesByDifficulty:[],
-  exercisesByType:[],
+  exercisesByEquipment:[],
   exercisesByMscZonePrinc:[],
   exercisesByName:[],
   exercise: exercise ? exercise : null,
@@ -43,22 +43,22 @@ export const exercisesSlice = createSlice({
     .addCase(getExerciseById.rejected, (state) => {
       state.isError = true;
     })
-    .addCase(getExerciseByName.fulfilled, (state, action) => {
+    .addCase(getExercisesByName.fulfilled, (state, action) => {
       state.exercisesByName = action.payload;
     })
-    .addCase(getExerciseByName.pending, (state) => {
+    .addCase(getExercisesByName.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(getExerciseByName.rejected, (state) => {
+    .addCase(getExercisesByName.rejected, (state) => {
       state.isError = true;
     })
-    .addCase(getExerciseByType.fulfilled, (state, action) => {
-      state.exercisesByType = action.payload;
+    .addCase(getExercisesByEquipment.fulfilled, (state, action) => {
+      state.exercisesByEquipment = action.payload;
     })
-    .addCase(getExerciseByType.pending, (state) => {
+    .addCase(getExercisesByEquipment.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(getExerciseByType.rejected, (state) => {
+    .addCase(getExercisesByEquipment.rejected, (state) => {
       state.isError = true;
     })
     .addCase(getExercisesByDifficulty.fulfilled, (state, action) => {
@@ -70,13 +70,13 @@ export const exercisesSlice = createSlice({
     .addCase(getExercisesByDifficulty.rejected, (state) => {
       state.isError = true;
     })
-    .addCase(getExerciseByMuscleZonePrincipal.fulfilled, (state, action) => {
+    .addCase(getExercisesByMuscleZonePrincipal.fulfilled, (state, action) => {
       state.exercisesByMscZonePrinc = action.payload;
     })
-    .addCase(getExerciseByMuscleZonePrincipal.pending, (state) => {
+    .addCase(getExercisesByMuscleZonePrincipal.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(getExerciseByMuscleZonePrincipal.rejected, (state) => {
+    .addCase(getExercisesByMuscleZonePrincipal.rejected, (state) => {
       state.isError = true;
     })
     .addCase(createExercise.fulfilled, (state, action) => {
@@ -111,20 +111,20 @@ async (id,thunkAPI) => {
     }
   }
 );
-export const getExerciseByName = createAsyncThunk("exercises/getExerciseByName ",
+export const getExercisesByName = createAsyncThunk("exercises/getExercisesByName ",
 async (name,thunkAPI) => {
     try {
-      return await exercisesService.getExerciseByName(name);
+      return await exercisesService.getExercisesByName(name);
     } catch (error) {
       console.error(error);
       return thunkAPI.rejectWithValue(message);
     }
   }
 );
-export const getExerciseByType = createAsyncThunk("exercises/getExerciseByType",
+export const getExercisesByEquipment = createAsyncThunk("exercises/getExercisesByEquipment",
   async (type, thunkAPI) => {
     try {
-      return await exercisesService.getExerciseByType(type);
+      return await exercisesService.getExercisesByEquipment(type);
     } catch (error) {
       console.error(error);
       return thunkAPI.rejectWithValue(error.message); // Pasar el mensaje de error
@@ -143,10 +143,10 @@ export const getExercisesByDifficulty = createAsyncThunk("exercises/getExercises
   }
 );
 
-export const getExerciseByMuscleZonePrincipal = createAsyncThunk("exercises/getExerciseByMuscleZonePrincipal",
+export const getExercisesByMuscleZonePrincipal = createAsyncThunk("exercises/getExercisesByMuscleZonePrincipal",
   async (muscleZonePrincipal, thunkAPI) => {
     try {
-      return await exercisesService.getExerciseByMuscleZonePrincipal(muscleZonePrincipal);
+      return await exercisesService.getExercisesByMuscleZonePrincipal(muscleZonePrincipal);
     } catch (error) {
       console.error(error);
       return thunkAPI.rejectWithValue(error.message); // Pasar el mensaje de error

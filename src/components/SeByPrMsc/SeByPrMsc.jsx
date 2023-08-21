@@ -4,19 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const SeByPrMsc = () => {
   const dispatch = useDispatch();
-  const { exercisesByMscZonePrincipal } = useSelector((state) => state.exercises);
+  const { exercisesByMscZonePrinc } = useSelector((state) => state.exercises);
 
   const [selectedMscZone, setSelectedMscZone] = useState(null);
 
   const handleMscZoneClick = (mscZone) => {
     setSelectedMscZone(mscZone);
-    dispatch(getExercisesByMuscleZonePrincipal(mscZone));
+   
   };
 
   const muscleZoneOptions = [
     'Pectoral', 'Dorsal', 'Hombros', 'Tríceps', 'Bíceps', 'Antebrazos',
     'Abdominales', 'Glúteos', 'Cuádriceps', 'Isquiotibiales', 'Gemelos', 'Trapecios',
-    'Lumbares', 'Oblicuos', 'Adductores', 'Abductores'
+    'Lumbares', 'Adductores'
   ];
 
   useEffect(() => {
@@ -32,8 +32,8 @@ const SeByPrMsc = () => {
           {mscZone}
         </button>
       ))}
-      {exercisesByMscZonePrincipal ? (
-        exercisesByMscZonePrincipal.map((exercise) => (
+      {exercisesByMscZonePrinc ? (
+        exercisesByMscZonePrinc.map((exercise) => (
           <div className='exContainer' key={exercise._id}>
             <h3>Exercise: {exercise.name}</h3>
             <p>Description: {exercise.description}</p>
@@ -44,7 +44,7 @@ const SeByPrMsc = () => {
             </p>
             <p>Difficulty: {exercise.difficulty}</p>
             <div className='vi-img-container'>
-              <img src={exercise.imageMZP} alt='Principal muscle' />
+              
               <iframe
                 src={`https://www.youtube.com/embed/${exercise.videoId}`} // URL del video
                 title='YouTube Video'

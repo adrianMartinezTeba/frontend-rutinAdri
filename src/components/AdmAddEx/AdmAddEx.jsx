@@ -6,7 +6,7 @@ const AdmAddEx = () => {
   const dispatch = useDispatch();
   
   const [exerciseFormData, setExerciseFormData] = useState({
-    type: "",
+    equipment: "",
     name: "",
     description: "",
     muscleZonePrincipal: "",
@@ -26,6 +26,15 @@ const AdmAddEx = () => {
 
   const handleAddExercise = () => {
     dispatch(createExercise(exerciseFormData)); // Envía los datos del ejercicio a Redux para su almacenamiento
+    setExerciseFormData(
+      {  equipment: "",
+      name: "",
+      description: "",
+    
+      difficulty: "",
+      imageMZP: "",
+      videoId: ""}
+    )
   };
 
   useEffect(() => {
@@ -36,13 +45,18 @@ const AdmAddEx = () => {
     <div>
       <h2>Agregar Ejercicio</h2>
       <div>
-        <label>Tipo:</label>
-        <input
-          type="text"
-          name="type"
-          value={exerciseFormData.type}
+        <label>Equipamiento:</label>
+           <select
+          name="equipment"
+          value={exerciseFormData.equipment}
           onChange={handleInputChange}
-        />
+        >
+            <option value="">Seleccione una opción</option>
+          <option value="Maquina/mancuerna">Maquina/mancuerna</option>
+          <option value="Parque de barras">Parque de barras</option>
+          <option value="Ejercicios corporales">Ejercicios corporales</option>
+          <option value="Gomas">Gomas</option>
+        </select>
       </div>
       <div>
         <label>Nombre:</label>
@@ -86,19 +100,11 @@ const AdmAddEx = () => {
           value={exerciseFormData.difficulty}
           onChange={handleInputChange}
         >
+            <option value="">Seleccione una opción</option>
           <option value="Easy">Easy</option>
           <option value="Medium">Medium</option>
           <option value="Hard">Hard</option>
         </select>
-      </div>
-      <div>
-        <label>URL de la Imagen:</label>
-        <input
-          type="text"
-          name="imageMZP"
-          value={exerciseFormData.imageMZP}
-          onChange={handleInputChange}
-        />
       </div>
       <div>
         <label>ID del Video:</label>
