@@ -38,11 +38,11 @@ const SeByDifficulty = () => {
 
   useEffect(() => {
     if (difficulty.easy) {
-      dispatch(getExercisesByDifficulty('easy'));
+      dispatch(getExercisesByDifficulty('Easy'));
     } else if (difficulty.medium) {
-      dispatch(getExercisesByDifficulty('medium'));
+      dispatch(getExercisesByDifficulty('Medium'));
     } else if (difficulty.hard) {
-      dispatch(getExercisesByDifficulty('hard'));
+      dispatch(getExercisesByDifficulty('Hard'));
     }
   }, [difficulty, dispatch]);
 useEffect(()=>{
@@ -60,10 +60,8 @@ useEffect(()=>{
             <p>Description: {exercise.description}</p>
             <p>Primary muscle zone: {exercise.muscleZonePrincipal}</p>
             <p>
-              Secundaries muscles zones:{' '}
-              {exercise.muscleZoneSecundaries.map((mzs) => (
-                <span key={mzs}>{mzs}</span>
-              ))}
+              Secundaries muscles zones:
+              {exercise.muscleZoneSecundaries}
             </p>
             <p>Difficulty: {exercise.difficulty}</p>
             <div className='vi-img-container'>
