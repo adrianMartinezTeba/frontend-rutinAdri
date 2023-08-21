@@ -48,6 +48,42 @@ export const exercisesSlice = createSlice({
     .addCase(getExerciseByName.rejected, (state) => {
       state.isError = true;
     })
+    .addCase(getExerciseByType.fulfilled, (state, action) => {
+      state.exercises = action.payload;
+    })
+    .addCase(getExerciseByType.pending, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(getExerciseByType.rejected, (state) => {
+      state.isError = true;
+    })
+    .addCase(getExerciseByDifficulty.fulfilled, (state, action) => {
+      state.exercises = action.payload;
+    })
+    .addCase(getExerciseByDifficulty.pending, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(getExerciseByDifficulty.rejected, (state) => {
+      state.isError = true;
+    })
+    .addCase(getExerciseByMuscleZonePrincipal.fulfilled, (state, action) => {
+      state.exercises = action.payload;
+    })
+      .addCase(getExerciseByMuscleZoneSecundaries.fulfilled, (state, action) => {
+      state.exercises = action.payload;
+    })
+    .addCase(getExerciseByMuscleZoneSecundaries.pending, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(getExerciseByMuscleZoneSecundaries.rejected, (state) => {
+      state.isError = true;
+    })
+    .addCase(getExerciseByMuscleZonePrincipal.pending, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(getExerciseByMuscleZonePrincipal.rejected, (state) => {
+      state.isError = true;
+    })
     .addCase(createExercise.fulfilled, (state, action) => {
       state.exercise = action.payload;
     })
@@ -87,6 +123,49 @@ async (name,thunkAPI) => {
     } catch (error) {
       console.error(error);
       return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+export const getExerciseByType = createAsyncThunk("exercises/getExerciseByType",
+  async (type, thunkAPI) => {
+    try {
+      return await exercisesService.getExerciseByType(type);
+    } catch (error) {
+      console.error(error);
+      return thunkAPI.rejectWithValue(error.message); // Pasar el mensaje de error
+    }
+  }
+);
+
+export const getExerciseByDifficulty = createAsyncThunk("exercises/getExerciseByDifficulty",
+  async (difficulty, thunkAPI) => {
+    try {
+      return await exercisesService.getExerciseByDifficulty(difficulty);
+    } catch (error) {
+      console.error(error);
+      return thunkAPI.rejectWithValue(error.message); // Pasar el mensaje de error
+    }
+  }
+);
+
+export const getExerciseByMuscleZoneSecundaries = createAsyncThunk("exercises/getExerciseByMuscleZoneSecundaries",
+  async (muscleZoneSecundaries, thunkAPI) => {
+    try {
+      return await exercisesService.getExerciseByMuscleZoneSecundaries(muscleZoneSecundaries);
+    } catch (error) {
+      console.error(error);
+      return thunkAPI.rejectWithValue(error.message); // Pasar el mensaje de error
+    }
+  }
+);
+
+export const getExerciseByMuscleZonePrincipal = createAsyncThunk("exercises/getExerciseByMuscleZonePrincipal",
+  async (muscleZonePrincipal, thunkAPI) => {
+    try {
+      return await exercisesService.getExerciseByMuscleZonePrincipal(muscleZonePrincipal);
+    } catch (error) {
+      console.error(error);
+      return thunkAPI.rejectWithValue(error.message); // Pasar el mensaje de error
     }
   }
 );
