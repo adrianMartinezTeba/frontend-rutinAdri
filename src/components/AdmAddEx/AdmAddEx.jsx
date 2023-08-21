@@ -86,9 +86,9 @@ const AdmAddEx = () => {
           value={exerciseFormData.difficulty}
           onChange={handleInputChange}
         >
-          <option value="Fácil">Fácil</option>
-          <option value="Moderado">Moderado</option>
-          <option value="Difícil">Difícil</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
         </select>
       </div>
       <div>
