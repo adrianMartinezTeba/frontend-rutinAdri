@@ -4,7 +4,7 @@ import { getExercisesByName, reset } from '../../features/exercises/exercisesSli
 
 const SeByName = () => {
   const dispatch = useDispatch();
-  const { isSuccess, message, isError, exercisesByName } = useSelector((state) => state.exercises);
+  const { isSuccess, message, isError, exercises } = useSelector((state) => state.exercises);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const SeByName = () => {
         onChange={onChange}
       />
       <ul>
-        {exercisesByName.map((exercise) => (
+        {exercises.map((exercise) => (
           <div className='exContainer' key={exercise._id}>
           <h3>Exercise: {exercise.name}</h3>
           <p>Description: {exercise.description}</p>

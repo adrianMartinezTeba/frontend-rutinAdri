@@ -1,0 +1,24 @@
+.crRoutContainer{
+    border: 1px solid black;
+    width: 300px;
+    margin: 10px;
+  form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .crRoutDayContainer{
+        border: 1px solid black;
+    }
+  }
+}
+.crRoSeContainer{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: rgb(190, 176, 157);
+    margin: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+}

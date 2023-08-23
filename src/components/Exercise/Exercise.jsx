@@ -1,22 +1,28 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getExerciseById } from "../../features/exercises/exercisesSlice"
 const Exercise = () => {
+    const {id} = useParams();
+    const dispatch = useDispatch();
   const { exercise} = useSelector((state) => state.exercises);
+  useEffect(()=>{
+dispatch(getExerciseById(id))
+console.log(exercise);
+  },[])
   useEffect(()=>{
 
   },[exercise])
   return (
     <div>
-                <div className='exContainer' key={exercise._id}>
+                {
+                    exercise ? (<div className='exContainer' key={exercise._id}>
                     <h3>Exercise: {exercise.name}</h3>
                     <p>Description: {exercise.description}</p>
                     <p>Primary muscle zone: {exercise.muscleZonePrincipal}</p>
                     <p>Secundaries muscles zones:
-                        {exercise.muscleZoneSecundaries.map((mzs) => (
-                            <span key={mzs}>
-                                {mzs}
-                            </span>
-                        ))}
+                        {exercise.muscleZoneSecundaries}
+                          
                     
                     </p>
                     <p>Difficulty:{exercise.difficulty}</p>
@@ -29,7 +35,10 @@ const Exercise = () => {
                             allowFullScreen // Permite pantalla completa
                         ></iframe>
                     </div>
-                </div>
+                </div>) : (
+                    <p>Loading...</p>
+                )
+                }
             
     </div>
   )

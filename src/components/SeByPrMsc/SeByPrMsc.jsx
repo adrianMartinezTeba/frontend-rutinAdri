@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const SeByPrMsc = () => {
   const dispatch = useDispatch();
-  const { exercisesByMscZonePrinc } = useSelector((state) => state.exercises);
+  const { exercises } = useSelector((state) => state.exercises);
 
   const [selectedMscZone, setSelectedMscZone] = useState(null);
 
@@ -14,7 +14,7 @@ const SeByPrMsc = () => {
   };
 
   const muscleZoneOptions = [
-    'Pectoral', 'Dorsal', 'Hombros', 'Tríceps', 'Bíceps', 'Antebrazos',
+    'Pectoral', 'Dorsales', 'Hombros', 'Tríceps', 'Bíceps', 'Antebrazos',
     'Abdominales', 'Glúteos', 'Cuádriceps', 'Isquiotibiales', 'Gemelos', 'Trapecios',
     'Lumbares', 'Adductores'
   ];
@@ -32,8 +32,8 @@ const SeByPrMsc = () => {
           {mscZone}
         </button>
       ))}
-      {exercisesByMscZonePrinc ? (
-        exercisesByMscZonePrinc.map((exercise) => (
+      {exercises ? (
+        exercises.map((exercise) => (
           <div className='exContainer' key={exercise._id}>
             <h3>Exercise: {exercise.name}</h3>
             <p>Description: {exercise.description}</p>

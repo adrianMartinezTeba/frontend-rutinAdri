@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { getExercisesByDifficulty, reset } from '../../features/exercises/exercisesSlice';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { Link } from 'react-router-dom';
 const SeByDifficulty = () => {
   const dispatch = useDispatch();
-  const { exercisesByDifficulty } = useSelector((state) => state.exercises);
+  const { exercises } = useSelector((state) => state.exercises);
 
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
 
@@ -27,9 +27,10 @@ const SeByDifficulty = () => {
           {difficulty}
         </button>
       ))}
-      {exercisesByDifficulty ? (
-        exercisesByDifficulty.map((exercise) => (
-          <div className='exContainer' key={exercise._id}>
+      {exercises ? (
+        exercises.map((exercise) => (
+         <Link to={'/exercise/'+ exercise._id} className='exContainer' key={exercise._id}> 
+          
             <h3>Exercise: {exercise.name}</h3>
             <p>Description: {exercise.description}</p>
             <p>Primary muscle zone: {exercise.muscleZonePrincipal}</p>
@@ -47,7 +48,8 @@ const SeByDifficulty = () => {
                 allowFullScreen // Permite pantalla completa
               ></iframe>
             </div>
-          </div>
+          
+         </Link>
         ))
       ) : (
         <h2>Choose one difficulty.</h2>

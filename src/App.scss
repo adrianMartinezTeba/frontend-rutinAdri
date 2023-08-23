@@ -1,3 +1,15 @@
 *{
     margin: 0px;
 }
+.exContainer{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    margin: 10px;
+    max-width: 300px;
+    max-height: 500px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+}

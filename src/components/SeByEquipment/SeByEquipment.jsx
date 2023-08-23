@@ -3,7 +3,7 @@ import { getExercisesByEquipment, reset } from '../../features/exercises/exercis
 import { useDispatch, useSelector } from 'react-redux';
 const SeByType = () => {
   const dispatch = useDispatch();
-  const { exercisesByEquipment } = useSelector((state) => state.exercises);
+  const { exercises } = useSelector((state) => state.exercises);
   const [selectedEquipment, setSelectedEquipment] = useState(null);
   const handleTypeClick = (equipment) => {
     setSelectedEquipment(equipment);
@@ -22,8 +22,8 @@ const SeByType = () => {
         ))
       }
       {
-        exercisesByEquipment ? (
-          exercisesByEquipment.map((exercise)=>(
+        exercises ? (
+          exercises.map((exercise)=>(
             <div className='exContainer' key={exercise._id}>
             <h3>Exercise: {exercise.name}</h3>
             <p>Description: {exercise.description}</p>
@@ -45,7 +45,7 @@ const SeByType = () => {
           </div>
           ))
         ):(
-          <h2>Choose one equipment.</h2>
+          <h2>Elige una opción.</h2>
         )
       }
     </div>

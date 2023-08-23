@@ -7,7 +7,8 @@ const getAllExercises = async () => {
     return res.data;
 };
 const getExerciseById = async (id) => {
-    const res = await axios.get(`${API_URL}/exercises/byID/${id}`);
+    const res = await axios.get(`${API_URL}/exercises/byId/${id}`);
+    localStorage.setItem("exercise", JSON.stringify(res.data));
     return res.data;
 };
 const getExercisesByName = async (name) => {

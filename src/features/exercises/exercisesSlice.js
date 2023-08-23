@@ -2,11 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import exercisesService from "./exercisesService";
 const exercise = JSON.parse(localStorage.getItem("exercise"));
 const initialState = {
-  exercises: [],
-  exercisesByDifficulty:[],
-  exercisesByEquipment:[],
-  exercisesByMscZonePrinc:[],
-  exercisesByName:[],
+
+  exercises:[],
   exercise: exercise ? exercise : null,
   isLoading: false,
   isError: false,
@@ -44,7 +41,7 @@ export const exercisesSlice = createSlice({
       state.isError = true;
     })
     .addCase(getExercisesByName.fulfilled, (state, action) => {
-      state.exercisesByName = action.payload;
+      state.exercises = action.payload;
     })
     .addCase(getExercisesByName.pending, (state) => {
       state.isLoading = true;
@@ -53,7 +50,7 @@ export const exercisesSlice = createSlice({
       state.isError = true;
     })
     .addCase(getExercisesByEquipment.fulfilled, (state, action) => {
-      state.exercisesByEquipment = action.payload;
+      state.exercises = action.payload;
     })
     .addCase(getExercisesByEquipment.pending, (state) => {
       state.isLoading = true;
@@ -62,7 +59,7 @@ export const exercisesSlice = createSlice({
       state.isError = true;
     })
     .addCase(getExercisesByDifficulty.fulfilled, (state, action) => {
-      state.exercisesByDifficulty = action.payload;
+      state.exercises = action.payload;
     })
     .addCase(getExercisesByDifficulty.pending, (state) => {
       state.isLoading = true;
@@ -71,7 +68,7 @@ export const exercisesSlice = createSlice({
       state.isError = true;
     })
     .addCase(getExercisesByMuscleZonePrincipal.fulfilled, (state, action) => {
-      state.exercisesByMscZonePrinc = action.payload;
+      state.exercises = action.payload;
     })
     .addCase(getExercisesByMuscleZonePrincipal.pending, (state) => {
       state.isLoading = true;
